@@ -15,7 +15,7 @@ public class ThrowSpear : MonoBehaviour
     }
     IEnumerator spearCoolDown() {
         isAbleToThrow = false;
-        Instantiate(spear, player.transform.position, player.transform.rotation);
+        Instantiate(spear, player.transform.position, Quaternion.Euler(0, 0, 0));
         yield return new WaitForSeconds(60/rateByMinute); ;
         isAbleToThrow = true;
     }
