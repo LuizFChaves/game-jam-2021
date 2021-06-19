@@ -11,16 +11,15 @@ public class Enemy : MonoBehaviour {
         
     }
 
-
-
-    void onGetHited(float damage) {
+    public void onGetHit(float damage) {
         this.health -= damage;
     }
 
     void Update(){
         if(health <= 0) {
             isAlive = false;
+        } else {
+            transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
         }
-        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
     }
 }
