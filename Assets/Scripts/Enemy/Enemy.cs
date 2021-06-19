@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-
-    public float movementSpeed = 1f;
+    public bool isAlive = true;
+    public float movementSpeed = 10f;
     public float health = 3f;
 
-    // Start is called before the first frame update
     void Start(){
         
     }
 
-    // Update is called once per frame
+
+
+    void onGetHited(float damage) {
+        this.health -= damage;
+    }
+
     void Update(){
-        
+        if(health <= 0) {
+            isAlive = false;
+        }
+        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
     }
 }

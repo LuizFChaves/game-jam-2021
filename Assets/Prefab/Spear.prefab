@@ -96,4 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spear: {fileID: 1204046530316989267}
-  spearSpeed: 60
+  spearSpeed: 20
