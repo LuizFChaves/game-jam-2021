@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerController : MonoBehaviour{
-    enum SpawnerState { spawning, waiting};
 
     [SerializeField]
     public List<Wave> waves = new List<Wave>();
 
     int nextWaveIndex = 0;
-    float waveCountdown = 5f;
-    SpawnerState state = SpawnerState.waiting;
+    public float waveCountdown = 5f;
 
     public void createWave() {
         Spawner[] spawners = new Spawner[transform.childCount];
@@ -19,21 +17,15 @@ public class SpawnerController : MonoBehaviour{
         }
         waves.Add(new Wave(spawners));
     }
-    IEnumerator spawnNextWave() {
-        Wave nextWave = waves[nextWaveIndex];
-        yield return StartCoroutine(nextWave.SpawnWave());
-        waveCountdown = nextWave.timeToNextWave;
 
-        state = SpawnerState.waiting;
-        nextWaveIndex++;
-    }
 
     // Update is called once per frame
     void Update() {
-        if(waveCountdown <= 0 && state== SpawnerState.waiting) {
+        if(waveCountdown <= 0 ) {
            if(! (nextWaveIndex >= waves.Count)) {
-                state = SpawnerState.spawning;
-                StartCoroutine(spawnNextWave());
+                Wave nextWave = waves[nextWaveIndex++];
+                nextWave.SpawnWave();
+                waveCountdown += nextWave.timeToNextWave;
            }
         } else {
             waveCountdown -= Time.deltaTime;

@@ -3248,7 +3248,7 @@ MonoBehaviour:
       spawner: {fileID: 1032548831}
     - enemies: []
       spawner: {fileID: 615939850}
-    timeToNextWave: 5
+    timeToNextWave: 3
   - waveLanes:
     - enemies: []
       spawner: {fileID: 1867471554}
@@ -3258,7 +3258,8 @@ MonoBehaviour:
       spawner: {fileID: 1032548831}
     - enemies: []
       spawner: {fileID: 615939850}
-    timeToNextWave: 5
+    timeToNextWave: 1
+  waveCountdown: 1
 --- !u!4 &1448327653
 Transform:
   m_ObjectHideFlags: 0
