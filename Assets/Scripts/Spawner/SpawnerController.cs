@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour{
     enum SpawnerState { spawning, waiting};
 
-
     [SerializeField]
     public List<Wave> waves = new List<Wave>();
 
