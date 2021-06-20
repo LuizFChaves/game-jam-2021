@@ -9,8 +9,8 @@ public class SpawnerController : MonoBehaviour{
     [System.Serializable]
     public class Wave {
         public GameObject[] enemies;
-        public int count = 1;
-        public float RPM = 1f;
+        public int count = 2;
+        public float RPM = 3f;
         public float timeToNextWave = 0f;
     }
     [SerializeField]
