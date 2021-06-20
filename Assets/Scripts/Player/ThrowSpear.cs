@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThrowSpear : MonoBehaviour
 {
+    public AudioSource audioData;
     Player player;
     public GameObject spear;
     public float rateByMinute = 1f;
@@ -15,6 +16,7 @@ public class ThrowSpear : MonoBehaviour
     }
     IEnumerator spearCoolDown() {
         isAbleToThrow = false;
+        audioData.Play(0);
         Instantiate(spear, player.transform.position, Quaternion.Euler(0, 0, 0));
         yield return new WaitForSeconds(60/rateByMinute); ;
         isAbleToThrow = true;

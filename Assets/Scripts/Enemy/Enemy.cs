@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+
     public bool isAlive = true;
     public float movementSpeed = 10f;
     public float health = 3f;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour {
 
     void Update(){
         if(health <= 0) {
+            Destroy(gameObject,1);
             isAlive = false;
         } else {
             transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));

@@ -11,7 +11,7 @@ public class SpawnerController : MonoBehaviour{
         public GameObject[] enemies;
         public int count = 1;
         public float RPM = 1f;
-        public float timeToNextWave = 10f;
+        public float timeToNextWave = 0f;
     }
     [SerializeField]
     public Wave[] waves;
@@ -23,7 +23,7 @@ public class SpawnerController : MonoBehaviour{
     bool ended = false;
     SpawnState state = SpawnState.waiting;
 
-    Spawner[] spawners = new Spawner[5];
+    Spawner[] spawners = new Spawner[3];
 
     IEnumerator SpawnWave(Wave _wave) {
         state = SpawnState.spawning;
@@ -42,8 +42,6 @@ public class SpawnerController : MonoBehaviour{
         spawners[0] = this.gameObject.transform.GetChild(0).GetComponent<Spawner>();
         spawners[1] = this.gameObject.transform.GetChild(1).GetComponent<Spawner>();
         spawners[2] = this.gameObject.transform.GetChild(2).GetComponent<Spawner>();
-        spawners[3] = this.gameObject.transform.GetChild(3).GetComponent<Spawner>();
-        spawners[4] = this.gameObject.transform.GetChild(4).GetComponent<Spawner>();
 
         waveCountdown = timeBetweenWaves;
     }
