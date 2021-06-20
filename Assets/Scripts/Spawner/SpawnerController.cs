@@ -3,62 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerController : MonoBehaviour{
+    enum SpawnerState { spawning, waiting};
 
-    public enum SpawnState { spawning, waiting }
 
-    [System.Serializable]
-    public class Wave {
-        public GameObject[] enemies;
-        public int count = 1;
-        public float RPM = 1f;
-        public float timeToNextWave = 0f;
-    }
     [SerializeField]
-    public Wave[] waves;
+    public List<Wave> waves = new List<Wave>();
 
-    int nextWave = 0;
-    float timeBetweenWaves = 5f;
-    float waveCountdown;
+    int nextWaveIndex = 0;
+    float waveCountdown = 5f;
+    SpawnerState state = SpawnerState.waiting;
 
-    bool ended = false;
-    SpawnState state = SpawnState.waiting;
-
-    Spawner[] spawners = new Spawner[3];
-
-    IEnumerator SpawnWave(Wave _wave) {
-        state = SpawnState.spawning;
-
-        for(int i=0; i < _wave.count; i++) {
-            Spawner spawner = spawners[Random.Range(0, spawners.Length)];
-            spawner.createEnemy(_wave.enemies[Random.Range(0, _wave.enemies.Length)]);
-            yield return new WaitForSeconds(60 / _wave.RPM); 
+    public void createWave() {
+        Spawner[] spawners = new Spawner[transform.childCount];
+        for(int i=0; i< spawners.Length; i++) {
+            spawners[i] = transform.GetChild(i).GetComponent<Spawner>();
         }
-        nextWave++;
-        state = SpawnState.waiting;
-        yield break;
+        waves.Add(new Wave(spawners));
     }
+    IEnumerator spawnNextWave() {
+        Wave nextWave = waves[nextWaveIndex];
+        yield return StartCoroutine(nextWave.SpawnWave());
+        waveCountdown = nextWave.timeToNextWave;
 
-    void Start() {
-        spawners[0] = this.gameObject.transform.GetChild(0).GetComponent<Spawner>();
-        spawners[1] = this.gameObject.transform.GetChild(1).GetComponent<Spawner>();
-        spawners[2] = this.gameObject.transform.GetChild(2).GetComponent<Spawner>();
-
-        waveCountdown = timeBetweenWaves;
+        state = SpawnerState.waiting;
+        nextWaveIndex++;
     }
 
     // Update is called once per frame
     void Update() {
-        if (!ended) {
-
-            if(waveCountdown <= 0) {
-                if(state == SpawnState.waiting) {
-                    if(! (nextWave >= waves.Length)) {
-                        StartCoroutine(SpawnWave(waves[nextWave]));
-                    }
-                }
-            } else {
-                waveCountdown -= Time.deltaTime;
-            }
+        if(waveCountdown <= 0 && state== SpawnerState.waiting) {
+           if(! (nextWaveIndex >= waves.Count)) {
+                state = SpawnerState.spawning;
+                StartCoroutine(spawnNextWave());
+           }
+        } else {
+            waveCountdown -= Time.deltaTime;
         }
+   
     }
 }

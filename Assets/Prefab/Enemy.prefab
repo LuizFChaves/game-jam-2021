@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86942cb20f88fba47b094ca4c18c264d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem: {fileID: 0}
   isAlive: 1
   movementSpeed: 1
   health: 3
@@ -141,7 +140,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 14318669d2b132343bb3a9a6fee3dc9c, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!95 &8881316569106270513
