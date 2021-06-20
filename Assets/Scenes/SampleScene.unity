@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 615939849}
   - component: {fileID: 615939850}
   m_Layer: 0
-  m_Name: SpawnerPointD
+  m_Name: SpawnerPointC
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2920,7 +2920,7 @@ GameObject:
   - component: {fileID: 1032548830}
   - component: {fileID: 1032548831}
   m_Layer: 0
-  m_Name: SpawnerPointC
+  m_Name: SpawnerPointB
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3239,11 +3239,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemies:
-    - {fileID: 3312239194805357052, guid: 93a662d003e986f47847631ca4a7d516, type: 3}
-    count: 4
-    RPM: 8
-    timeToNextWave: 10
+  - waveLanes:
+    - enemies:
+      - {fileID: 3312239194805357052, guid: 93a662d003e986f47847631ca4a7d516, type: 3}
+      - {fileID: 3312239194805357052, guid: 93a662d003e986f47847631ca4a7d516, type: 3}
+      spawner: {fileID: 1867471554}
+    - enemies: []
+      spawner: {fileID: 1032548831}
+    - enemies: []
+      spawner: {fileID: 615939850}
+    timeToNextWave: 5
+  - waveLanes:
+    - enemies: []
+      spawner: {fileID: 1867471554}
+    - enemies:
+      - {fileID: 3312239194805357052, guid: 93a662d003e986f47847631ca4a7d516, type: 3}
+      - {fileID: 3312239194805357052, guid: 93a662d003e986f47847631ca4a7d516, type: 3}
+      spawner: {fileID: 1032548831}
+    - enemies: []
+      spawner: {fileID: 615939850}
+    timeToNextWave: 5
 --- !u!4 &1448327653
 Transform:
   m_ObjectHideFlags: 0
